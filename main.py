@@ -12,7 +12,7 @@ else:
     class Corex(commands.Bot):
         def __init__(self):
             intents = discord.Intents.default()
-
+            intents.members = True
             super().__init__(
                 command_prefix="!",
                 intents=intents
@@ -20,7 +20,11 @@ else:
 
         async def setup_hook(self):
             await self.load_extension("cogs.utility")
+            await self.load_extension("cogs.welcome")
             print("Utility cog loaded")
+            print("Welcome cog loaded")
+            synced = await self.tree.sync()
+            print(f"Synced {len(synced)} slash commands")
 
         async def on_ready(self):
             print(f"{self.user} has connected to Discord!")
