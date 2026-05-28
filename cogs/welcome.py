@@ -11,7 +11,15 @@ class Welcome(commands.Cog):
         channel_id = 1508375532583129098
         channel = self.bot.get_channel(channel_id)
         if channel:
-            await channel.send(f"Welcome to the server, {member.mention}!")
+            embed = discord.Embed(
+                title="Welcome to the Server!",
+                description=f"Hello {member.mention}, welcome to {member.guild.name}! We're glad to have you here. Feel free to introduce yourself and explore the channels. If you have any questions, don't hesitate to ask the moderators or other members. Enjoy your stay!",
+                color=discord.Color.blue()
+            )
+            embed.set_thumbnail(url=member.avatar.url if member.avatar else None)
+            
+            await channel.send(embed=embed)
+
         else:
             print(f"No system channel found for {member.guild.name}. Cannot send welcome message.")
 
